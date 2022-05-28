@@ -36,7 +36,6 @@ const FloorPage = () => {
 
   const handleItemFocus = (event: any) => {
     setSelectedListLocationId(getLocationId(event));
-    console.log('item focus', getLocationId(event));
   }
 
   const handleItemBlur = () => {
@@ -128,8 +127,7 @@ const FloorPage = () => {
 
       <div className="flex">
 
-        <div className='w-1/4 max-h-93vh overflow-y-scroll'>
-          {/* TODO: make onFocus on Room block work. Now focus appears on its children */}
+        <div className='w-1/4 max-h-93vh h-93vh overflow-y-scroll'>
           <RoomList
             rooms={rooms}
             searchQuery={roomQuery}
