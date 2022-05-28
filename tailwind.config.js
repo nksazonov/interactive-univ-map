@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      inset: {
+        '1/12': '8.333vw'
+      }
+    },
   },
   plugins: [],
 }

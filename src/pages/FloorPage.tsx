@@ -9,7 +9,8 @@ import DataAdapter from '../data/DataAdapter'
 import { getLocationName, getLocationId } from '../utils/event-utils';
 import { IFloor, IRoom } from '../data/types'
 import { useParams } from 'react-router-dom'
-import { FaChevronLeft } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import FloorList from '../components/FloorList'
 
 interface ITooltipStyle {
   display: string,
@@ -21,6 +22,7 @@ const FloorPage = () => {
   const [roomQuery, setRoomQuery] = useState('');
   const [tooltipStyle, setTooltipStyle] = useState({display: 'none'} as ITooltipStyle);
   const [roomListShown, setRoomListShown] = useState(true);
+  const [floorListShown, setFloorListShown] = useState(true);
 
   const [hoveredMapLocationName, setHoveredMapLocationName] = useState('');
   const [hoveredMapLocationId, setHoveredMapLocationId] = useState('');
@@ -153,7 +155,7 @@ const FloorPage = () => {
           <FaChevronLeft size={22} className={`transition rotate inline-block text-slate-400 ${!roomListShown ? 'rotate-180' : ''}`} />
         </div>
 
-        <div className="flex justify-center items-center flex-1 box-border max-h-75 h-75vh ">
+        <div className="flex justify-center items-center flex-1 box-border max-h-75 h-75vh mt-7vh">
           <SVGMap
             className="w-10/12 max-h-93vh py-12 box-border"
             map={map}
@@ -170,6 +172,24 @@ const FloorPage = () => {
             {hoveredMapLocationName}
           </div>
         </div>
+
+        <div
+          className={`absolute bottom-0 pr-2 pl-5 py-5 rounded-l-full bg-slate-200 hover:cursor-pointer hover:bg-slate-300 ${floorListShown ? 'right-1/12' : 'right-0'}`}
+          onClick={() => setFloorListShown(!floorListShown)}
+        >
+          <FaChevronRight size={22} className={`transition rotate inline-block text-slate-400 ${!floorListShown ? 'rotate-180' : ''}`} />
+        </div>
+
+        {
+          floorListShown ?
+          <div className='self-center justify-self-end w-1/12 flex flex-col max-h-93vh h-93vh overflow-y-scroll rtl'>
+            <FloorList
+              floors={floors}
+              selectedFloorId={floorId}
+            />
+          </div>
+          : null
+        }
 
       </div>
     </>

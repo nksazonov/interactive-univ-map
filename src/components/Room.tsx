@@ -18,7 +18,7 @@ const Room = ({ room, className, onFocus, onBlur, onMouseOver, onMouseOut, tabIn
   let hasStaff = !!room.staff && room.staff.length !== 0;
   return (
     <div
-      className={`box-border p-4 mb-3 border-2 border-transparent outline-0 rounded select-none bg-slate-50 hover:border-slate-400 hover:bg-slate-100 ${hasStaff ? "hover:cursor-pointer" : ''} ${className ?? ""}`}
+      className={`box-border p-4 mt-4 border-2 border-transparent outline-0 rounded select-none bg-slate-50 hover:border-slate-400 hover:bg-slate-100 ${hasStaff ? "hover:cursor-pointer" : ''} ${className ?? ""}`}
       id={room.id}
       tabIndex={tabIndex ? tabIndex : 0}
       onFocus={onFocus}

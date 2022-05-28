@@ -35,7 +35,7 @@ interface IRoomListProps {
 const RoomList = ({ rooms, className, searchQuery, onQueryChange, onItemFocus, onItemBlur, onItemMouseOver, onItemMouseOut, getRoomClassName }: IRoomListProps) => {
   return (
     <div className={`p-4 ${className ?? ""}`}>
-      <div className="py-4">
+      <div className="">
         <input
           placeholder="🔍 Пошук кімнат"
           className='w-full border rounded px-3 py-1.5 outline-gray-300'
