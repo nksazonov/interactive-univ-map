@@ -15,7 +15,7 @@ function App() {
     <Router basename="/interactive-map">
       <Switch>
         <Route exact path="/" component={ BuildingPage } />
-        <Route exatc path="/404-page-not-found" component={ PageNotFound } />
+        <Route exact path="/404-page-not-found" component={ PageNotFound } />
         <Route path="/:floorId" component={ FloorPage } />
       </Switch>
     </Router>

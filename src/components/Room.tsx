@@ -1,7 +1,19 @@
-import React, {useState} from 'react'
+import React, {FocusEventHandler, MouseEventHandler, useState} from 'react'
 import { FaUserAlt, FaChevronDown } from 'react-icons/fa'
 
-const Room = ({ room, className, onFocus, onBlur, onMouseOver, onMouseOut, tabIndex }) => {
+import {IRoom} from '../data/types';
+
+interface IRoomProps {
+  room: IRoom,
+  onFocus: FocusEventHandler,
+  onBlur: FocusEventHandler,
+  onMouseOver: MouseEventHandler,
+  onMouseOut: MouseEventHandler,
+  className?: string,
+  tabIndex?: number,
+}
+
+const Room = ({ room, className, onFocus, onBlur, onMouseOver, onMouseOut, tabIndex } : IRoomProps) => {
   const [opened, setOpened] = useState(false);
   let hasStaff = !!room.staff && room.staff.length !== 0;
   return (
@@ -37,7 +49,7 @@ const Room = ({ room, className, onFocus, onBlur, onMouseOver, onMouseOut, tabIn
           opened ?
           <div className="text-slate-600 mt-6">
             <FaUserAlt size={14} className="inline-block text-secondary" /> Викладачі:
-            { room.staff.map(person => <a className="block text-blue-500 underline hover:text-blue-700" href={person.link} key={person.name}>{person.name}</a>) }
+            { room.staff!.map(person => <a className="block text-blue-500 underline hover:text-blue-700" href={person.link} key={person.name}>{person.name}</a>) }
           </div>
           : null
         : null

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { ChangeEventHandler, FocusEventHandler, MouseEventHandler } from 'react'
+import { IRoom } from '../data/types';
 import Room from './Room'
 
-const roomSatisfiesQuery = (room, query) => {
+const roomSatisfiesQuery = (room: IRoom, query: string) => {
   query = query.toLowerCase();
   const { nameShort, name, staff } = room;
   if (nameShort.toString().toLowerCase().includes(query) || name.toString().toLowerCase().includes(query)) {
@@ -19,7 +20,19 @@ const roomSatisfiesQuery = (room, query) => {
   return false;
 }
 
-const RoomList = ({ rooms, className, searchQuery, onQueryChange, onItemFocus, onItemBlur, onItemMouseOver, onItemMouseOut, itemClassName }) => {
+interface IRoomListProps {
+  rooms: IRoom[],
+  searchQuery: string,
+  onQueryChange: ChangeEventHandler,
+  onItemFocus: FocusEventHandler,
+  onItemBlur: FocusEventHandler,
+  onItemMouseOver: MouseEventHandler,
+  onItemMouseOut: MouseEventHandler,
+  getRoomClassName?: (room: IRoom) => string,
+  className?: string,
+}
+
+const RoomList = ({ rooms, className, searchQuery, onQueryChange, onItemFocus, onItemBlur, onItemMouseOver, onItemMouseOut, getRoomClassName }: IRoomListProps) => {
   return (
     <div className={`p-4 ${className ?? ""}`}>
       <div className="py-4">
@@ -38,7 +51,7 @@ const RoomList = ({ rooms, className, searchQuery, onQueryChange, onItemFocus, o
           .map(room => <Room
             room={room}
             key={room.id}
-            className={itemClassName ? itemClassName(room) : ""}
+            className={getRoomClassName ? getRoomClassName(room) : ""}
             onFocus={onItemFocus}
             onBlur={onItemBlur}
             onMouseOver={onItemMouseOver}
