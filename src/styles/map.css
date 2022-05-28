@@ -1,12 +1,3 @@
-.map-tooltip {
-  position: fixed;
-  width: 200px;
-  padding: 10px;
-  border: 1px solid darkgray;
-  background-color: white;
-  text-align: center;
-}
-
 .floor {
   fill: #e6ecec;
 }

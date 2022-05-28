@@ -4,8 +4,8 @@ import { FaQuestion, FaChevronLeft } from 'react-icons/fa'
 
 const Header = ({ goBack, goBackLink, tooltip, breadcrumbs, activeBreadcrumb }) => {
   return (
-    <div>
-      <div className="d-flex align-items-center">
+    <div className='flex justify-between w-100 py-5'>
+      <div className="flex items-center">
         {
           goBack ?
           <button as={Link} variant="outline-light" to={goBackLink} className="border-0 text-secondary text-decoration-none h-100 d-block p-2 d-flex align-items-center">
@@ -15,8 +15,8 @@ const Header = ({ goBack, goBackLink, tooltip, breadcrumbs, activeBreadcrumb }) 
         }
       </div>
 
-      <div xs="auto">
-        <div bsPrefix="breadcrumb header-text bg-transparent mb-0">
+      <div className="auto">
+        <div className="text-4xl font-medium text-slate-800">
           {
             breadcrumbs ?
             breadcrumbs.map((breadcrumb, idx) => (
@@ -33,23 +33,7 @@ const Header = ({ goBack, goBackLink, tooltip, breadcrumbs, activeBreadcrumb }) 
         </div>
       </div>
 
-      <div className="d-flex align-items-center justify-content-end">
-        {
-          tooltip ?
-          <div
-            key="info"
-            placement="bottom"
-            overlay={
-              <div id="tooltip-info">
-                { tooltip }
-              </div>
-            }
-          >
-            <div pill className="p-1 text-secondary"><FaQuestion size={22} /></div>
-          </div>
-          : null
-        }      
-      </div>
+      <div />
     </div>
   )
 }

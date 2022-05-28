@@ -64,7 +64,7 @@ class BuildingPage extends React.Component {
     this.setState({ tooltipStyle });
   }
 
-  getLocationClassName(location, index) {
+  getLocationClassName(location) {
 		return `${location.id} floor ${this.state.hoveredListLocationId === location.id ? "hovered" : ""}`;
 	}
 
@@ -74,7 +74,7 @@ class BuildingPage extends React.Component {
 
     return (
       <>
-        <div fluid className="px-5 position-fixed bg-light-gray header-breadcrumb">
+        <div className="px-5 position-fixed bg-light-gray w-100">
           
           <Header
             tooltip={<span><strong>Оберіть поверх</strong>, натиснувши на нього на мапі або у списку</span>}
@@ -83,53 +83,45 @@ class BuildingPage extends React.Component {
 
         </div>
 
-        <div fluid className="px-5 pb-5 pt-7vh">
+        <div className="p-10 flex flex-col items-center">
 
-          <div className="my-3">
-            <div className="d-flex justify-content-center">
-              <div className="p-5"
-                style={{ maxWidth: "75vw", flex: 1 }}>
-                <SVGMap
-                  map={map}
-                  locationClassName={this.getLocationClassName}
-                  onLocationClick={this.handleLocationClick}
-                  onLocationFocus={this.handleLocationClick}
-                  onLocationMouseOver={this.handleLocationMouseOver}
-                  onLocationMouseOut={this.handleLocationMouseOut}
-                  onLocationMouseMove={this.handleLocationMouseMove}
-                  childrenBefore={childrenBefore}
-                  childrenAfter={childrenAfter}
-                />
-                <div className="map-tooltip" style={this.state.tooltipStyle}>
-                  {this.state.hoveredMapLocationName}
-                </div>
-              </div>
+          <div className="d-flex justify-content-center mb-10 w-10/12">
+            <SVGMap
+              map={map}
+              locationClassName={this.getLocationClassName}
+              onLocationClick={this.handleLocationClick}
+              onLocationFocus={this.handleLocationClick}
+              onLocationMouseOver={this.handleLocationMouseOver}
+              onLocationMouseOut={this.handleLocationMouseOut}
+              onLocationMouseMove={this.handleLocationMouseMove}
+              childrenBefore={childrenBefore}
+              childrenAfter={childrenAfter}
+            />
+            <div className="fixed bg-white px-12 py-2 border border-gray-400" style={this.state.tooltipStyle}>
+              {this.state.hoveredMapLocationName}
             </div>
+
           </div>
 
-          <div>
-            <div>
-              <div className="floors-list">
-                {
-                  floors.map(floor => (
-                  <CustomLink
-                    id={floor.id}
-                    key={ floor.id }
-                    to={`/${floor.id}`}
-                    className="text-secondary"
-                    onMouseOver={this.handleItemMouseOver}
-                    onMouseOut={this.handleItemMouseOut}
-                  >
-                    <FloorItem
-                      floorNum={ floor.num }
-                      floorText={ floor.description }
-                      className={`${this.state.hoveredMapLocationId === floor.id ? "hovered" : ""}`}
-                    />
-                  </CustomLink>
-                  ))
-                }
-              </div>
-            </div>
+          <div className="grid grid-cols-4 items-center gap-5 text-gray-500">
+            {
+              floors.map(floor => (
+              <CustomLink
+                id={floor.id}
+                key={ floor.id }
+                to={`/${floor.id}`}
+                className="text-secondary"
+                onMouseOver={this.handleItemMouseOver}
+                onMouseOut={this.handleItemMouseOut}
+              >
+                <FloorItem
+                  floorNum={ floor.num }
+                  floorText={ floor.description }
+                  className={`${this.state.hoveredMapLocationId === floor.id ? "bg-gray-200 text-gray-900" : ""}`}
+                />
+              </CustomLink>
+              ))
+            }
           </div>
         </div>
       </>

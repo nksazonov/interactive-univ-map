@@ -2,46 +2,6 @@
   font-family: Roboto, sans-serif;
 }
 
-.page-not-found {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 3vw 5vw;
-}
-
-.header-breadcrumb {
-  height: 7vh;
-  z-index: 10;
-  display: flex;
-  width: 100%;
-  align-items: center;
-}
-
-.header-breadcrumb > .row {
-  width: 100%;
-}
-
-.floors-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: center;
-  gap: 20px;
-}
-
-.fi-block {
-  box-sizing: border-box;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.fi-block:hover, .fi-block.hovered {
-  cursor: pointer;
-  color: black !important;
-  background-color: #e6ecec;
-  border-radius: 10px;
-}
-
 .fi-room {
   display: inline-block;
   font-size: 20px;

@@ -9,22 +9,6 @@
   font-size: 25px;
 }
 
-.fi-num {
-  display: inline-block;
-  text-align: center;
-  margin: .75vw;
-  font-size: 3rem;
-}
-
-.fi-text {
-  display: inline-block;
-  font-size: 18px;
-}
-
-.text-underline {
-  text-decoration: underline;
-}
-
 .f-room-desc {
   font-size: 18px !important;
   font-weight: 500 !important;
