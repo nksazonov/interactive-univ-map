@@ -16,7 +16,7 @@ const Header = ({ goBackText, goBackLink, breadcrumbs, activeBreadcrumbText }: I
         {
           goBackText ?
           // @ts-ignore
-          <CustomLink to={goBackLink} className="block p-2 flex items-center text-gray-500 rounded-md hover:bg-gray-100 hover:cursor-pointer">
+          <CustomLink to={goBackLink} className="block p-2 relative flex-1 flex items-center text-gray-500 rounded-md hover:bg-gray-100 hover:cursor-pointer">
             <FaChevronLeft size={22} /><span className="ml-2 text-lg">{ goBackText }</span>
           </CustomLink>
           : <div />
@@ -44,7 +44,7 @@ const Header = ({ goBackText, goBackLink, breadcrumbs, activeBreadcrumbText }: I
         </div>
       </div>
 
-      <div />
+      <div className='flex-1' />
     </div>
   )
 }
