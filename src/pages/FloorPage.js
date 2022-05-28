@@ -1,6 +1,5 @@
 import React from 'react'
 import { withRouter , Redirect } from 'react-router-dom'
-import { Container, Row, Col } from 'react-bootstrap'
 
 import RoomList from '../components/RoomList'
 import Header from '../components/Header'
@@ -122,7 +121,7 @@ class FloorPage extends React.Component {
 
     return (
       <>
-        <Container fluid className="px-5 position-fixed bg-light-gray header-breadcrumb">
+        <div fluid className="px-5 position-fixed bg-light-gray header-breadcrumb">
           <Header
             goBack="Обрати поверх"
             goBackLink="/"
@@ -131,12 +130,12 @@ class FloorPage extends React.Component {
             breadcrumbs={[ { to: "/", title: "ФКНК" } ]}
           />
 
-        </Container>
+        </div>
 
-        <Container fluid className="px-5 pt-7vh">
+        <div fluid className="px-5 pt-7vh">
 
-          <Row>
-            <Col>
+          <div>
+            <div>
               {/* TODO: make onFocus on Room block work. Now focuse appears on its children */}
               <RoomList
                 rooms={rooms}
@@ -148,9 +147,9 @@ class FloorPage extends React.Component {
                 onItemMouseOut={this.handleItemMouseOut}
                 itemClassName={this.getItemClassName}
               />
-            </Col>
+            </div>
 
-            <Col xl={9} lg={8} className="d-flex align-items-center">
+            <div xl={9} lg={8} className="d-flex align-items-center">
               <div className="d-flex justify-content-center p-5 max-h-93vh" style={{ flex: 1 }}>
                 <SVGMap
                   className="w-75"
@@ -169,9 +168,9 @@ class FloorPage extends React.Component {
                 </div>
               </div>
 
-            </Col>
-          </Row>
-        </Container>
+            </div>
+          </div>
+        </div>
       </>
     )
   }

@@ -1,6 +1,6 @@
 const PageNotFound = () => {
   return (
-    <div className="page-not-found">
+    <div className="flex flex-col bg-slate-600">
       <h3>Error 404:</h3>
       <h1>Page not found!</h1>
     </div>

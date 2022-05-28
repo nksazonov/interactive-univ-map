@@ -2,7 +2,6 @@ import React from 'react'
 
 import FloorItem from '../components/FloorItem'
 import CustomLink from '../components/CustomLink'
-import { Container, Row, Col } from 'react-bootstrap'
 import Header from '../components/Header'
 import { SVGMap } from 'react-svg-map'
 import fcsc from '../data/fcsc'
@@ -75,19 +74,19 @@ class BuildingPage extends React.Component {
 
     return (
       <>
-        <Container fluid className="px-5 position-fixed bg-light-gray header-breadcrumb">
+        <div fluid className="px-5 position-fixed bg-light-gray header-breadcrumb">
           
           <Header
             tooltip={<span><strong>Оберіть поверх</strong>, натиснувши на нього на мапі або у списку</span>}
             activeBreadcrumb="Факультет комп’ютерних наук та кібернетики"
           />
 
-        </Container>
+        </div>
 
-        <Container fluid className="px-5 pb-5 pt-7vh">
+        <div fluid className="px-5 pb-5 pt-7vh">
 
-          <Row className="my-3">
-            <Col className="d-flex justify-content-center">
+          <div className="my-3">
+            <div className="d-flex justify-content-center">
               <div className="p-5"
                 style={{ maxWidth: "75vw", flex: 1 }}>
                 <SVGMap
@@ -105,11 +104,11 @@ class BuildingPage extends React.Component {
                   {this.state.hoveredMapLocationName}
                 </div>
               </div>
-            </Col>
-          </Row>
+            </div>
+          </div>
 
-          <Row>
-            <Col>
+          <div>
+            <div>
               <div className="floors-list">
                 {
                   floors.map(floor => (
@@ -130,9 +129,9 @@ class BuildingPage extends React.Component {
                   ))
                 }
               </div>
-            </Col>
-          </Row>
-        </Container>
+            </div>
+          </div>
+        </div>
       </>
     )
   }

@@ -4,3 +4,6 @@
 @import "metrics.css";
 @import "accordion.css";
 @import "map.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

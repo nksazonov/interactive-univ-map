@@ -1,5 +1,4 @@
 import React from 'react'
-import { Form } from 'react-bootstrap'
 import Room from './Room'
 
 const roomSatisfiesQuery = (room, query) => {
@@ -23,14 +22,14 @@ const roomSatisfiesQuery = (room, query) => {
 const RoomList = ({ rooms, className, searchQuery, onQueryChange, onItemFocus, onItemBlur, onItemMouseOver, onItemMouseOut, itemClassName }) => {
   return (
     <div className={`rooms-list ${className ? className : ""}`}>
-      <Form className="py-4">
-        <Form.Control
+      <div className="py-4">
+        <div
           as="input"
           placeholder="🔍 Пошук кімнат"
           value={searchQuery}
           onChange={onQueryChange}
         />
-      </Form>
+      </div>
 
       <div className="accordion" id="accordionPanelsStayOpenExample">
         {

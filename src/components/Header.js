@@ -1,57 +1,56 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, Breadcrumb, OverlayTrigger, Tooltip, Badge, Button } from 'react-bootstrap'
 import { FaQuestion, FaChevronLeft } from 'react-icons/fa'
 
 const Header = ({ goBack, goBackLink, tooltip, breadcrumbs, activeBreadcrumb }) => {
   return (
-    <Row>
-      <Col className="d-flex align-items-center">
+    <div>
+      <div className="d-flex align-items-center">
         {
           goBack ?
-          <Button as={Link} variant="outline-light" to={goBackLink} className="border-0 text-secondary text-decoration-none h-100 d-block p-2 d-flex align-items-center">
+          <button as={Link} variant="outline-light" to={goBackLink} className="border-0 text-secondary text-decoration-none h-100 d-block p-2 d-flex align-items-center">
             <FaChevronLeft size={22} /><span className="ms-2 fi-text text-middle">{ goBack }</span>
-          </Button>
+          </button>
           : null
         }
-      </Col>
+      </div>
 
-      <Col xs="auto">
-        <Breadcrumb bsPrefix="breadcrumb header-text bg-transparent mb-0">
+      <div xs="auto">
+        <div bsPrefix="breadcrumb header-text bg-transparent mb-0">
           {
             breadcrumbs ?
             breadcrumbs.map((breadcrumb, idx) => (
-              <Breadcrumb.Item key={idx} linkAs={Link} linkProps={{ to: breadcrumb.to, className: "text-secondary text-underline" }}>
+              <div key={idx} linkAs={Link} linkProps={{ to: breadcrumb.to, className: "text-secondary text-underline" }}>
                 { breadcrumb.title }
-              </Breadcrumb.Item>
+              </div>
             ))
             : null
           }
 
-          <Breadcrumb.Item active className="text-dark">
+          <div active className="text-dark">
             { activeBreadcrumb }
-          </Breadcrumb.Item>
-        </Breadcrumb>
-      </Col>
+          </div>
+        </div>
+      </div>
 
-      <Col className="d-flex align-items-center justify-content-end">
+      <div className="d-flex align-items-center justify-content-end">
         {
           tooltip ?
-          <OverlayTrigger
+          <div
             key="info"
             placement="bottom"
             overlay={
-              <Tooltip id="tooltip-info">
+              <div id="tooltip-info">
                 { tooltip }
-              </Tooltip>
+              </div>
             }
           >
-            <Badge pill className="p-1 text-secondary"><FaQuestion size={22} /></Badge>
-          </OverlayTrigger>
+            <div pill className="p-1 text-secondary"><FaQuestion size={22} /></div>
+          </div>
           : null
         }      
-      </Col>
-    </Row>
+      </div>
+    </div>
   )
 }
 
