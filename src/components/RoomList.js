@@ -21,17 +21,17 @@ const roomSatisfiesQuery = (room, query) => {
 
 const RoomList = ({ rooms, className, searchQuery, onQueryChange, onItemFocus, onItemBlur, onItemMouseOver, onItemMouseOut, itemClassName }) => {
   return (
-    <div className={`rooms-list ${className ? className : ""}`}>
+    <div className={`p-4 ${className ?? ""}`}>
       <div className="py-4">
-        <div
-          as="input"
+        <input
           placeholder="🔍 Пошук кімнат"
+          className='w-full border rounded px-3 py-1.5 outline-gray-300'
           value={searchQuery}
           onChange={onQueryChange}
         />
       </div>
 
-      <div className="accordion" id="accordionPanelsStayOpenExample">
+      <div className="">
         {
           rooms
           .filter(room => roomSatisfiesQuery(room, searchQuery))

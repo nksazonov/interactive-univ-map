@@ -7,13 +7,14 @@ const CustomLink = withRouter(props => {
 
   return (
     <div
-      {...rest}
       onClick={evt => {
         evt.preventDefault();
         rest.onClick && rest.onClick(evt);
         rest.history.push(rest.to);
       }}
       href={rest.to}
+      className={"hover:cursor-pointer " + (rest.className ?? '')}
+      {...rest}
     />
   )
 })

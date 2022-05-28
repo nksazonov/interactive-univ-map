@@ -47,6 +47,7 @@ class FloorPage extends React.Component {
 
   handleItemFocus(event) {
     const selectedItemLocationId = getLocationId(event);
+    console.log('item focus');
     this.setState({ selectedItemLocationId });
   }
 
@@ -65,6 +66,7 @@ class FloorPage extends React.Component {
   
   handleLocationFocus(event) {
     const selectedMapLocationId = getLocationId(event);
+    console.log('location focus');
     this.setState({ selectedMapLocationId });
   }
 
@@ -91,17 +93,17 @@ class FloorPage extends React.Component {
     this.setState({ tooltipStyle });
   }
 
-  getLocationClassName(location, index) {
+  getLocationClassName(location) {
 		return `${location.id} floor ${this.state.hoveredListLocationId === location.id ? "hovered" : ""}`;
 	}
 
   getItemClassName(item) {
     let className = "";
     if (this.state.hoveredMapLocationId === item.id) {
-    className += " hovered";
+      className += " bg-slate-100 border-slate-400";
     }
     if (this.state.selectedMapLocationId === item.id) {
-      className += " selected";
+      className += " bg-slate-100 border-slate-400";
     }
     
     return className;
@@ -121,55 +123,50 @@ class FloorPage extends React.Component {
 
     return (
       <>
-        <div fluid className="px-5 position-fixed bg-light-gray header-breadcrumb">
+        <div className="px-5 bg-light-gray w-100">
           <Header
             goBack="Обрати поверх"
             goBackLink="/"
-            tooltip={<span><strong>Оберіть кабінет</strong>, натиснувши на нього на мапі або у списку</span>}
             activeBreadcrumb={ `Поверх ${floor.num}` }
             breadcrumbs={[ { to: "/", title: "ФКНК" } ]}
           />
 
         </div>
 
-        <div fluid className="px-5 pt-7vh">
+        <div className="flex">
 
-          <div>
-            <div>
-              {/* TODO: make onFocus on Room block work. Now focuse appears on its children */}
-              <RoomList
-                rooms={rooms}
-                searchQuery={this.state.roomQuery}
-                onQueryChange={e => this.setState({ roomQuery: e.target.value })}
-                onItemFocus={this.onItemFocus}
-                onItemBlur={this.onItemBlur}
-                onItemMouseOver={this.handleItemMouseOver}
-                onItemMouseOut={this.handleItemMouseOut}
-                itemClassName={this.getItemClassName}
-              />
-            </div>
+          <div className='w-1/4 max-h-93vh overflow-y-scroll'>
+            {/* TODO: make onFocus on Room block work. Now focuse appears on its children */}
+            <RoomList
+              rooms={rooms}
+              searchQuery={this.state.roomQuery}
+              onQueryChange={e => this.setState({ roomQuery: e.target.value })}
+              onItemFocus={this.onItemFocus}
+              onItemBlur={this.onItemBlur}
+              onItemMouseOver={this.handleItemMouseOver}
+              onItemMouseOut={this.handleItemMouseOut}
+              itemClassName={this.getItemClassName}
+            />
+          </div>
 
-            <div xl={9} lg={8} className="d-flex align-items-center">
-              <div className="d-flex justify-content-center p-5 max-h-93vh" style={{ flex: 1 }}>
-                <SVGMap
-                  className="w-75"
-                  map={map}
-                  locationClassName={this.getLocationClassName}
-                  onLocationFocus={this.handleLocationFocus}
-                  onLocationBlur={this.handleLocationBlur}
-                  onLocationMouseOver={this.handleLocationMouseOver}
-                  onLocationMouseOut={this.handleLocationMouseOut}
-                  onLocationMouseMove={this.handleLocationMouseMove}
-                  childrenBefore={childrenBefore}
-                  childrenAfter={childrenAfter}
-                />
-                <div className="map-tooltip" style={this.state.tooltipStyle}>
-                  {this.state.hoveredMapLocationName}
-                </div>
-              </div>
-
+          <div className="flex justify-center items-center flex-1 box-border max-h-75 ">
+            <SVGMap
+              className="w-10/12 max-h-93vh py-12 box-border"
+              map={map}
+              locationClassName={this.getLocationClassName}
+              onLocationFocus={this.handleLocationFocus}
+              onLocationBlur={this.handleLocationBlur}
+              onLocationMouseOver={this.handleLocationMouseOver}
+              onLocationMouseOut={this.handleLocationMouseOut}
+              onLocationMouseMove={this.handleLocationMouseMove}
+              childrenBefore={childrenBefore}
+              childrenAfter={childrenAfter}
+            />
+            <div className="fixed bg-white px-12 py-2 border border-gray-400" style={this.state.tooltipStyle}>
+              {this.state.hoveredMapLocationName}
             </div>
           </div>
+
         </div>
       </>
     )
