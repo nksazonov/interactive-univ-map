@@ -9,6 +9,7 @@ import DataAdapter from '../data/DataAdapter'
 import { getLocationName, getLocationId } from '../utils/event-utils';
 import { IFloor, IRoom } from '../data/types'
 import { useParams } from 'react-router-dom'
+import { FaChevronLeft } from 'react-icons/fa'
 
 interface ITooltipStyle {
   display: string,
@@ -19,6 +20,7 @@ interface ITooltipStyle {
 const FloorPage = () => {
   const [roomQuery, setRoomQuery] = useState('');
   const [tooltipStyle, setTooltipStyle] = useState({display: 'none'} as ITooltipStyle);
+  const [roomListShown, setRoomListShown] = useState(true);
 
   const [hoveredMapLocationName, setHoveredMapLocationName] = useState('');
   const [hoveredMapLocationId, setHoveredMapLocationId] = useState('');
@@ -127,20 +129,31 @@ const FloorPage = () => {
 
       <div className="flex">
 
-        <div className='w-1/4 max-h-93vh h-93vh overflow-y-scroll'>
-          <RoomList
-            rooms={rooms}
-            searchQuery={roomQuery}
-            onQueryChange={e => setRoomQuery((e.target as HTMLInputElement).value)}
-            onItemFocus={handleItemFocus}
-            onItemBlur={handleItemBlur}
-            onItemMouseOver={handleItemMouseOver}
-            onItemMouseOut={handleItemMouseOut}
-            getRoomClassName={getRoomClassName}
-          />
+        {
+          roomListShown ?
+          <div className='w-1/4 max-h-93vh h-93vh overflow-y-scroll'>
+            <RoomList
+              rooms={rooms}
+              searchQuery={roomQuery}
+              onQueryChange={e => setRoomQuery((e.target as HTMLInputElement).value)}
+              onItemFocus={handleItemFocus}
+              onItemBlur={handleItemBlur}
+              onItemMouseOver={handleItemMouseOver}
+              onItemMouseOut={handleItemMouseOut}
+              getRoomClassName={getRoomClassName}
+            />
+          </div>
+          : null
+        }
+
+        <div
+          className={`absolute bottom-0 pl-2 pr-5 py-5 rounded-r-full bg-slate-200 hover:cursor-pointer hover:bg-slate-300 ${roomListShown ? 'left-1/4' : 'left-0'}`}
+          onClick={() => setRoomListShown(!roomListShown)}
+        >
+          <FaChevronLeft size={22} className={`transition rotate inline-block text-slate-400 ${!roomListShown ? 'rotate-180' : ''}`} />
         </div>
 
-        <div className="flex justify-center items-center flex-1 box-border max-h-75 ">
+        <div className="flex justify-center items-center flex-1 box-border max-h-75 h-75vh ">
           <SVGMap
             className="w-10/12 max-h-93vh py-12 box-border"
             map={map}

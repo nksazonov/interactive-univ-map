@@ -6,6 +6,10 @@
   height: 93vh;
 }
 
+.h-75vh {
+  height: 75vh;
+}
+
 .max-h-93vh {
   max-height: 93vh;
 }
