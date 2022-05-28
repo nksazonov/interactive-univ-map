@@ -1,0 +1,48 @@
+.header-text {
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.sf-text {
+  display: inline-block;
+  margin: 2vh 0 5vh;
+  font-size: 25px;
+}
+
+.fi-num {
+  display: inline-block;
+  text-align: center;
+  margin: .75vw;
+  font-size: 3rem;
+}
+
+.fi-text {
+  display: inline-block;
+  font-size: 18px;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.f-room-desc {
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  padding-left: 1.25rem !important;
+  border-radius: 5px;
+}
+
+.room-type {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 15px;
+  font-size: 16px;
+}
+
+.f-room-desc::after {
+  display: none !important;
+}
+
+.fs-0 {
+  font-size: 0 !important;
+}

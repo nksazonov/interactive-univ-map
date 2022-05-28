@@ -1,0 +1,31 @@
+.h-7vh {
+  height: 7vh;
+}
+
+.max-h-93vh {
+  max-height: 93vh;
+}
+
+.mt-7vh {
+  margin-top: 7vh;
+}
+
+.pt-7vh {
+  padding-top: 7vh;
+}
+
+.max-w-100 {
+  max-width: 100% !important;
+}
+
+.max-w-75 {
+  max-width: 75% !important;
+}
+
+.max-h-100 {
+  max-height: 100% !important;
+}
+
+.max-h-75 {
+  max-height: 75% !important;
+}

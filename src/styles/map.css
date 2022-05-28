@@ -1,0 +1,67 @@
+.map-tooltip {
+  position: fixed;
+  width: 200px;
+  padding: 10px;
+  border: 1px solid darkgray;
+  background-color: white;
+  text-align: center;
+}
+
+.floor {
+  fill: #e6ecec;
+}
+
+.floor:hover, .floor.hovered, .floor:focus {
+  cursor: pointer;
+  fill: #ffd987;
+}
+
+.floor:focus {
+  outline: none;
+}
+
+.outline {
+  fill: #96a8a8;
+  pointer-events: none;
+}
+
+.reachable {
+  fill: #e6ecec;
+}
+
+.not-reachable {
+  fill: #acc0be;
+}
+
+.stairs {
+  fill: #b3b3b3;
+}
+
+.scribes {
+  pointer-events: none;
+}
+
+.faded {
+  opacity: .25;
+}
+
+.hovered-location {
+  height: 50px;
+  font-size: 25px;
+}
+
+.room-head {
+  background-color: #ffe599;
+}
+
+.room-study {
+  background-color: #b6d7a8;
+}
+
+.room-department {
+  background-color: #b4a7d6;
+}
+
+.room-other {
+  background-color: #b3b3b3;
+}
