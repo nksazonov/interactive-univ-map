@@ -17,7 +17,6 @@ interface IRoomProps {
 const Room = ({ room, className, onFocus, onBlur, onMouseOver, onMouseOut, tabIndex } : IRoomProps) => {
   const [opened, setOpened] = useState(false);
   let hasStaff = !!room.staff && room.staff.length !== 0;
-  let location = useLocation();
 
   const handleShareClick = (e: any) => {
     e.stopPropagation();
@@ -46,12 +45,13 @@ const Room = ({ room, className, onFocus, onBlur, onMouseOver, onMouseOut, tabIn
           <div>
             <FaShareAlt
               size={16}
-              className="inline-block mr-4 text-slate-400 hover:cursor-pointer hover:text-slate-600"
+              className="inline-block text-slate-400 hover:cursor-pointer hover:text-slate-600"
               onClick={handleShareClick}
+              title="Copy link to clipboard"
             />
             {
               hasStaff ?
-              <FaChevronDown size={22} className={`transition rotate inline-block text-slate-400 ${opened ? 'rotate-180' : ''}`} />
+              <FaChevronDown size={22} className={`ml-4 transition rotate inline-block text-slate-400 ${opened ? 'rotate-180' : ''}`} />
               : null
             }
           </div>

@@ -188,7 +188,7 @@ const FloorPage = ({history}: {history: any}) => {
 
         {
           floorListShown ?
-          <div className='self-center justify-self-end w-1/12 flex flex-col max-h-93vh h-93vh overflow-y-scroll rtl'>
+          <div className='self-center justify-self-end w-1/12 max-h-93vh h-93vh overflow-y-scroll rtl'>
             <FloorList
               floors={floors}
               selectedFloorId={floorId}
