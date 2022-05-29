@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 export type IRoomCategories = 'study' | 'department' | 'head' | 'other';
 
 export interface IPerson {
@@ -21,8 +23,8 @@ export interface IFloor {
   description: string,
   path: string,
   viewBox: string,
-  svgBackground: JSX.IntrinsicElements,
-  svgForeground: JSX.IntrinsicElements,
+  svgBackground: any,
+  svgForeground: any,
   rooms: IRoom[],
 }
 
@@ -30,8 +32,11 @@ export interface IFaculty {
   id: string,
   name: string,
   nameShort: string,
+  address: string,
+  gmapsLink: string,
+  websiteLink: string,
   viewBox: string,
-  svgBackground: JSX.IntrinsicElements,
-  svgForeground: JSX.IntrinsicElements,
+  svgBackground: any | null,
+  svgForeground: any | null,
   floors: IFloor[],
 }

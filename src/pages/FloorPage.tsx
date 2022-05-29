@@ -4,7 +4,7 @@ import { withRouter, Redirect, useParams, useLocation } from 'react-router-dom';
 import RoomList from '../components/RoomList';
 import Header from '../components/Header';
 import { SVGMap } from 'react-svg-map';
-import fcsc from '../data/fcsc';
+import facData from '../data/data.js';
 import DataAdapter from '../data/DataAdapter';
 import { getLocationName, getLocationId } from '../utils/event-utils';
 import { IFloor, IRoom } from '../data/types';
@@ -109,28 +109,30 @@ const FloorPage = ({history}: {history: any}) => {
     return className;
   }
   
-  const dataAdapter = new DataAdapter(fcsc);
+  //@ts-ignore
+  const dataAdapter = new DataAdapter(facData);
 
   //@ts-ignore
-  const { floorId } = useParams();
-  const floors = dataAdapter.floorsList();
-  const floor = floors.find((floor: IFloor) => floor.id === floorId);
+  const { facultyId, floorId } = useParams();
+  const { nameShort, id } = dataAdapter.facultyInfo(facultyId);
+  const floors = dataAdapter.floorsList(facultyId);
+  const floor = floors?.find((floor: IFloor) => floor.id === floorId);
 
   if (!floor) {
     return <Redirect to='/404-page-not-found' />
   }
 
-  const { map, childrenBefore, childrenAfter } = dataAdapter.floorSVGmap(floorId);
-  const rooms = dataAdapter.roomsList(floorId);
+  const { map, childrenBefore, childrenAfter } = dataAdapter.floorSVGmap(facultyId, floorId);
+  const rooms = dataAdapter.roomsList(facultyId, floorId);
 
   return (
     <>
       <div className="px-5 bg-light-gray w-100">
         <Header
-          goBackText="Обрати поверх"
-          goBackLink="/"
+          goBackText="Сторінка факультету"
+          goBackLink={`/${facultyId}`} 
           activeBreadcrumbText={ `Поверх ${floor.num}` }
-          breadcrumbs={[ { to: "/", text: "ФКНК" } ]}
+          breadcrumbs={[ {to: '/', text: 'КНУ'}, { to: "/" + id, text: nameShort } ]}
         />
 
       </div>
@@ -141,8 +143,8 @@ const FloorPage = ({history}: {history: any}) => {
           roomListShown ?
           <div className='w-1/4 max-h-93vh h-93vh overflow-y-scroll'>
             <RoomList
-              floors={floors}
-              rooms={rooms}
+              floors={floors!}
+              rooms={rooms!}
               searchQuery={roomQuery}
               onQueryChange={e => setRoomQuery((e.target as HTMLInputElement).value)}
               onItemFocus={handleItemFocus}
@@ -165,6 +167,7 @@ const FloorPage = ({history}: {history: any}) => {
         <div className="flex justify-center items-center flex-1 box-border max-h-75 h-75vh mt-7vh">
           <SVGMap
             className="w-10/12 max-h-93vh py-12 box-border"
+            // @ts-ignore
             map={map}
             locationClassName={getLocationClassName}
             onLocationFocus={handleLocationFocus}
@@ -191,8 +194,9 @@ const FloorPage = ({history}: {history: any}) => {
           floorListShown ?
           <div className='self-center justify-self-end w-1/12 max-h-93vh h-93vh overflow-y-scroll rtl'>
             <FloorList
-              floors={floors}
+              floors={floors!}
               selectedFloorId={floorId}
+              selectedFacultyId={facultyId}
             />
           </div>
           : null

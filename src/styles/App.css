@@ -5,3 +5,7 @@
 .rtl {
   direction: rtl;
 }
+
+.univ-map {
+  background: url('../../public/map0_3.png') no-repeat right;
+}

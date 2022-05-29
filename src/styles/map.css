@@ -41,18 +41,18 @@
   font-size: 25px;
 }
 
-.room-head {
+.room-head, faculty-head {
   background-color: #ffe599;
 }
 
-.room-study {
+.room-study, .faculty-study {
   background-color: #b6d7a8;
 }
 
-.room-department {
+.room-department, .faculty-department {
   background-color: #b4a7d6;
 }
 
-.room-other {
+.room-other, .faculty-other {
   background-color: #b3b3b3;
 }

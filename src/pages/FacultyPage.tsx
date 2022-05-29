@@ -1,14 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 
-import FloorItem from '../components/FloorItem'
-import CustomLink from '../components/CustomLink'
-import Header from '../components/Header'
-import { SVGMap } from 'react-svg-map'
-import fcsc from '../data/fcsc'
-import DataAdapter from '../data/DataAdapter'
+import FloorItem from '../components/FloorItem';
+import CustomLink from '../components/CustomLink';
+import Header from '../components/Header';
+import { SVGMap } from 'react-svg-map';
+import facData from '../data/data.js';
+import DataAdapter from '../data/DataAdapter';
 import { getLocationName, getLocationId } from '../utils/event-utils';
-import { withRouter } from 'react-router-dom'
-import { IFloor } from '../data/types'
+import { useParams, withRouter } from 'react-router-dom';
+import { IFloor } from '../data/types';
 
 interface ITooltipStyle {
   display: string,
@@ -16,7 +16,7 @@ interface ITooltipStyle {
   left?: number,
 }
 
-const BuildingPage = ({history}: {history: any}) => {
+const FacultyPage = ({history}: {history: any}) => {
   const [tooltipStyle, setTooltipStyle] = useState({display: 'none'} as ITooltipStyle);
 
   const [hoveredMapLocationName, setHoveredMapLocationName] = useState('');
@@ -34,7 +34,7 @@ const BuildingPage = ({history}: {history: any}) => {
   
   const handleLocationClick = (event: any) => {
     const hoveredMapLocationId = getLocationId(event);
-    history.push(`/${hoveredMapLocationId}`);
+    history.push(`/${facultyId}/${hoveredMapLocationId}`);
   }
 
   const handleLocationMouseOver = (event: any) => {
@@ -62,16 +62,23 @@ const BuildingPage = ({history}: {history: any}) => {
 		return `${location.id} floor ${hoveredListLocationId === location.id ? "hovered" : ""}`;
 	}
 
-  const  dataAdapter = new DataAdapter(fcsc);
-  const { map, childrenBefore, childrenAfter } = dataAdapter.facultySVGmap();
-  const floors = dataAdapter.floorsList();
+  //@ts-ignore
+  const  dataAdapter = new DataAdapter(facData);
+  //@ts-ignore
+  const { facultyId } = useParams();
+  const { map, childrenBefore, childrenAfter } = dataAdapter.facultySVGmap(facultyId);
+  const { name: facultyName } = dataAdapter.facultyInfo(facultyId);
+  const floors = dataAdapter.floorsList(facultyId);
 
   return (
     <>
       <div className="px-5 position-fixed bg-light-gray w-100">
         
         <Header
-          activeBreadcrumbText="Факультет комп’ютерних наук та кібернетики"
+          goBackText="Мапа університету"
+          goBackLink="/" 
+          activeBreadcrumbText={facultyName}
+          breadcrumbs={[ {to: '/', text: 'КНУ'} ]}
         />
 
       </div>
@@ -80,6 +87,7 @@ const BuildingPage = ({history}: {history: any}) => {
 
         <div className="d-flex justify-content-center mb-10 w-10/12">
           <SVGMap
+            //@ts-ignore
             map={map}
             locationClassName={getLocationClassName}
             onLocationClick={handleLocationClick}
@@ -98,12 +106,12 @@ const BuildingPage = ({history}: {history: any}) => {
 
         <div className="grid grid-cols-4 items-center gap-5 text-gray-500">
           {
-            floors.map((floor: IFloor) => (
+            floors?.map((floor: IFloor) => (
             // @ts-ignore
             <CustomLink
               id={floor.id}
               key={ floor.id }
-              to={`/${floor.id}`}
+              to={`/${facultyId}/${floor.id}`}
               className="text-secondary"
               onMouseOver={handleItemMouseOver}
               onMouseOut={handleItemMouseOut}
@@ -123,4 +131,4 @@ const BuildingPage = ({history}: {history: any}) => {
 }
 
 
-export default withRouter(BuildingPage);
+export default withRouter(FacultyPage);
