@@ -13,7 +13,7 @@ import './styles/index.css';
 
 function App() {
   return (
-    <Router basename="/interactive-map">
+    <Router basename="/interactive-univ-map">
       <Switch>
         <Route exact path="/" component={ UniversityPage } />
         <Route path="/:facultyId/:floorId" component={ FloorPage } />
