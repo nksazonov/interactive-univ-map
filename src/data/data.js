@@ -1959,7 +1959,7 @@ export default
     "floors": [],
   }, {
     "id": "faculty-spe",
-    "name": "Механіко-математичний факультет",
+    "name": "Спорткомплекс кафедри фізичного виховання",
     "nameShort": "СКФВ",
     "address": "пр. Академіка Глушкова, 2",
     "gmapsLink": "https://www.google.com/maps/place/Sportkompleks+Kafedry+Fizychnoho+Vykhovannya+Ta+Sportu+Knu+Imeni+Tarasa+Shevchenka/@50.3836891,30.4740898,19.73z",
