@@ -1,16 +1,15 @@
-import React, {useState} from 'react'
-import { withRouter , Redirect } from 'react-router-dom'
+import React, {useState, useEffect} from 'react';
+import { withRouter, Redirect, useParams, useLocation } from 'react-router-dom';
 
-import RoomList from '../components/RoomList'
-import Header from '../components/Header'
-import { SVGMap } from 'react-svg-map'
-import fcsc from '../data/fcsc'
-import DataAdapter from '../data/DataAdapter'
+import RoomList from '../components/RoomList';
+import Header from '../components/Header';
+import { SVGMap } from 'react-svg-map';
+import fcsc from '../data/fcsc';
+import DataAdapter from '../data/DataAdapter';
 import { getLocationName, getLocationId } from '../utils/event-utils';
-import { IFloor, IRoom } from '../data/types'
-import { useParams } from 'react-router-dom'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import FloorList from '../components/FloorList'
+import { IFloor, IRoom } from '../data/types';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import FloorList from '../components/FloorList';
 
 interface ITooltipStyle {
   display: string,
@@ -18,58 +17,66 @@ interface ITooltipStyle {
   left?: number,
 }
 
-const FloorPage = () => {
+const FloorPage = ({history}: {history: any}) => {
   const [roomQuery, setRoomQuery] = useState('');
   const [tooltipStyle, setTooltipStyle] = useState({display: 'none'} as ITooltipStyle);
   const [roomListShown, setRoomListShown] = useState(true);
   const [floorListShown, setFloorListShown] = useState(true);
 
   const [hoveredMapLocationName, setHoveredMapLocationName] = useState('');
-  const [hoveredMapLocationId, setHoveredMapLocationId] = useState('');
-  const [hoveredListLocationId, setHoveredListLocationId] = useState('');
-  const [selectedMapLocationId, setSelectedMapLocationId] = useState('');
-  const [selectedListLocationId, setSelectedListLocationId] = useState('');
+  const [selectedLocationId, setSelectedLocationId] = useState('');
+  const [hoveredLocationId, setHoveredLocationId] = useState('');
 
-  //preselectedRoom: null,
 
-  // componentDidMount() {
-  //   const query = new URLSearchParams(this.props.location.search);
-  //   const preselectedRoom = query.get("room");
-  //   this.setState({ preselectedRoom }); // TODO
-  // }
+  const location = useLocation();
+  useEffect(() => {
+    let params = new URLSearchParams(location.search);
+    const roomId = params.get('selectedRoom');
+    if (roomId) {
+      setSelectedLocationId(roomId);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (selectedLocationId) {
+      history.replace(location.pathname + '?selectedRoom=' + (selectedLocationId));
+    } else {
+      history.replace(location.pathname);
+    }
+  }, [selectedLocationId]);
 
   const handleItemFocus = (event: any) => {
-    setSelectedListLocationId(getLocationId(event));
+    setSelectedLocationId(getLocationId(event));
   }
 
   const handleItemBlur = () => {
-    setSelectedListLocationId('');
+    setSelectedLocationId('');
   }
 
   const handleItemMouseOver = (event: any) => {
-    setHoveredListLocationId(getLocationId(event));
+    setHoveredLocationId(getLocationId(event));
   }
 
   const handleItemMouseOut = () => {
-    setHoveredListLocationId('');
+    setHoveredLocationId('');
   }
   
   const handleLocationFocus = (event: any) => {
-    setSelectedMapLocationId(getLocationId(event));
+    setSelectedLocationId(getLocationId(event));
   }
 
   const handleLocationBlur = () => {
-    setSelectedMapLocationId('');
+    setSelectedLocationId('');
   }
 
   const handleLocationMouseOver = (event: any) => {
     setHoveredMapLocationName(getLocationName(event));
-    setHoveredMapLocationId(getLocationId(event));
+    setHoveredLocationId(getLocationId(event));
   }
 
   const handleLocationMouseOut = () => {
     setHoveredMapLocationName('');
-    setHoveredMapLocationId('');
+    setHoveredLocationId('');
     setTooltipStyle({display: 'none'});
   }
 
@@ -84,8 +91,8 @@ const FloorPage = () => {
   const getLocationClassName = (location: any) =>  {
     let className = "";
 
-    if (hoveredListLocationId === location.id ||
-      selectedListLocationId === location.id) {
+    if (hoveredLocationId === location.id ||
+      selectedLocationId === location.id) {
       className += " hovered"
     }
 
@@ -94,9 +101,8 @@ const FloorPage = () => {
 
   const getRoomClassName = (room: IRoom) => {
     let className = "";
-    if (hoveredMapLocationId === room.id ||
-      selectedListLocationId === room.id ||
-      selectedMapLocationId === room.id) {
+    if (hoveredLocationId === room.id ||
+      selectedLocationId === room.id) {
       className += " bg-slate-100 border-slate-400";
     }
     
