@@ -35,7 +35,7 @@ const FloorPage = ({history}: {history: any}) => {
     if (roomId) {
       setSelectedLocationId(roomId);
     }
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     if (selectedLocationId) {
@@ -141,6 +141,7 @@ const FloorPage = ({history}: {history: any}) => {
           roomListShown ?
           <div className='w-1/4 max-h-93vh h-93vh overflow-y-scroll'>
             <RoomList
+              floors={floors}
               rooms={rooms}
               searchQuery={roomQuery}
               onQueryChange={e => setRoomQuery((e.target as HTMLInputElement).value)}

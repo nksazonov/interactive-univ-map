@@ -1,11 +1,11 @@
 import React, {FocusEventHandler, MouseEventHandler, useState} from 'react'
 import { FaUserAlt, FaChevronDown, FaShareAlt } from 'react-icons/fa'
-import { useLocation } from 'react-router-dom';
 
 import {IRoom} from '../data/types';
 
 interface IRoomProps {
   room: IRoom,
+  roomLink: string,
   onFocus: FocusEventHandler,
   onBlur: FocusEventHandler,
   onMouseOver: MouseEventHandler,
@@ -14,13 +14,13 @@ interface IRoomProps {
   tabIndex?: number,
 }
 
-const Room = ({ room, className, onFocus, onBlur, onMouseOver, onMouseOut, tabIndex } : IRoomProps) => {
+const Room = ({ room, roomLink, className, onFocus, onBlur, onMouseOver, onMouseOut, tabIndex } : IRoomProps) => {
   const [opened, setOpened] = useState(false);
   let hasStaff = !!room.staff && room.staff.length !== 0;
 
   const handleShareClick = (e: any) => {
     e.stopPropagation();
-    navigator.clipboard.writeText(window.location.href);
+    navigator.clipboard.writeText(roomLink);
   }
 
   return (
