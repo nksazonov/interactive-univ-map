@@ -13,14 +13,16 @@ interface IHeaderProps {
 const Header = ({ goBackText, goBackLink, breadcrumbs, activeBreadcrumbText }: IHeaderProps) => {
   return (
     <div className='flex justify-between w-100 py-5 h-7vh'>
+      <div className='flex-1'>
         {
           goBackText ?
           // @ts-ignore
-          <CustomLink to={goBackLink} className="block p-2 relative flex-1 flex items-center text-gray-500 rounded-md hover:bg-gray-100 hover:cursor-pointer">
+          <CustomLink to={goBackLink} className="w-fit p-2 flex items-center text-gray-500 rounded-md hover:bg-gray-100 hover:cursor-pointer">
             <FaChevronLeft size={22} /><span className="ml-2 text-lg">{ goBackText }</span>
           </CustomLink>
           : <div />
         }
+      </div>
 
       <div className="auto">
         <div className="text-4xl font-medium text-slate-800">
