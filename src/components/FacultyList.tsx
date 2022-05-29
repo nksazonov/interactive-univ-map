@@ -36,9 +36,6 @@ const FacultyList = ({ faculties, className, searchQuery, onQueryChange, onItemF
     history.push(to);
   }
 
-  const getPath = (floorNum: number, roomId: string) => removeLastPrefix(window.location.pathname) + 'floor-' + floorNum + '?selectedRoom=' + roomId;
-
-
   return (
     <div className={`p-4 ${className ?? ""}`}>
       <div className="flex items-center">
@@ -59,7 +56,8 @@ const FacultyList = ({ faculties, className, searchQuery, onQueryChange, onItemF
               facultyLink={window.location.origin + window.location.pathname + faculty.id}
               key={faculty.id}
               className={getFacultyClassName ? getFacultyClassName(faculty) : ""}
-              onFocus={() => forwardToFloorPage(faculty.id + '/' + 'floor-' + faculty.floors[0].num)}
+              forwardToFaculty={() => forwardToFloorPage(faculty.id + (faculty.floors[0] ? '/' + 'floor-' + faculty.floors[0].num : ''))}
+              onFocus={onItemFocus}
               onBlur={onItemBlur}
               onMouseOver={onItemMouseOver}
               onMouseOut={onItemMouseOut}

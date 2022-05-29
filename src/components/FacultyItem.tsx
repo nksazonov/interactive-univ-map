@@ -7,7 +7,8 @@ import { IFaculty } from '../data/types';
 interface IFacultyItemProps {
   faculty: IFaculty,
   facultyLink: string,
-  onFocus: FocusEventHandler,
+  forwardToFaculty: MouseEventHandler,
+  onFocus?: FocusEventHandler,
   onBlur?: FocusEventHandler,
   onMouseOver?: MouseEventHandler,
   onMouseOut?: MouseEventHandler,
@@ -15,7 +16,7 @@ interface IFacultyItemProps {
   tabIndex?: number,
 }
 
-const FacultyItem = ({faculty, facultyLink, onFocus, onBlur, onMouseOver, onMouseOut, className, tabIndex}: IFacultyItemProps) => {
+const FacultyItem = ({faculty, facultyLink, forwardToFaculty, onFocus, onBlur, onMouseOver, onMouseOut, className, tabIndex}: IFacultyItemProps) => {
   const [opened, setOpened] = useState(false);
 
   const handleShareClick = (e: any) => {
@@ -28,6 +29,7 @@ const FacultyItem = ({faculty, facultyLink, onFocus, onBlur, onMouseOver, onMous
       className={`box-border p-4 mt-4 border-2 border-transparent outline-0 rounded select-none bg-slate-50 hover:border-slate-400 hover:bg-slate-100 ${className ?? ""}`}
       id={faculty.id}
       tabIndex={tabIndex ? tabIndex : 0}
+      onClick={() => setOpened(!opened)}
       onFocus={onFocus}
       onBlur={onBlur}
       onMouseOver={onMouseOver}
@@ -35,10 +37,13 @@ const FacultyItem = ({faculty, facultyLink, onFocus, onBlur, onMouseOver, onMous
     >
       <h2
         className="text-0"
-        onClick={() => setOpened(!opened)}
       >
         <div className='flex items-center justify-between mb-1'>
-          <button className={`inline-block text-xl text-slate-800 font-semibold`} tabIndex={-1} >
+          <button
+            className={`inline-block text-xl text-slate-800 font-semibold underline hover:text-slate-600`}
+            tabIndex={-1}
+            onClick={forwardToFaculty}
+          >
             {faculty.nameShort}
           </button>
 
@@ -56,8 +61,12 @@ const FacultyItem = ({faculty, facultyLink, onFocus, onBlur, onMouseOver, onMous
           </div>
         </div>
 
-        <button className={`font-medium text-left text-slate-800 leading-tight`} tabIndex={-1} >
-          <div className={`inline-block py-1 rounded-md text-md `}>{faculty.name}</div>
+        <button
+          className={`font-medium text-left text-slate-800 leading-tight`}
+          tabIndex={-1} 
+          onClick={forwardToFaculty}
+        >
+          <div className={`inline-block py-1 rounded-md text-md hover:text-slate-600`}>{faculty.name}</div>
         </button>
       </h2>
       {

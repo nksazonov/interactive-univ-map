@@ -85,6 +85,15 @@ const FacultyPage = ({history}: {history: any}) => {
 
       <div className="p-10 flex flex-col items-center">
 
+        {
+          !floors || floors?.length === 0 ?
+          <div className='mt-24 text-center'>
+            <div className='text-4xl font-medium text-slate-800'>Схеми поверхів для цієї будівлі відсутні.</div>
+            <div className='text-2xl font-medium text-slate-700 mt-6'>Будь ласка, допоможіть нам доповнити проект.</div>
+          </div>
+          : null
+        }
+
         <div className="d-flex justify-content-center mb-10 w-10/12">
           <SVGMap
             //@ts-ignore
