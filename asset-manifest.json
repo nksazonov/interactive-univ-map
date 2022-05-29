@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/interactive-univ-map/static/css/main.4c81644b.css",
-    "main.js": "/interactive-univ-map/static/js/main.7330b474.js",
+    "main.js": "/interactive-univ-map/static/js/main.c55f144b.js",
     "static/media/map0_3.png": "/interactive-univ-map/static/media/map0_3.48df23bbefe41e30e6fb.png",
     "index.html": "/interactive-univ-map/index.html",
     "main.4c81644b.css.map": "/interactive-univ-map/static/css/main.4c81644b.css.map",
-    "main.7330b474.js.map": "/interactive-univ-map/static/js/main.7330b474.js.map"
+    "main.c55f144b.js.map": "/interactive-univ-map/static/js/main.c55f144b.js.map"
   },
   "entrypoints": [
     "static/css/main.4c81644b.css",
-    "static/js/main.7330b474.js"
+    "static/js/main.c55f144b.js"
   ]
 }
